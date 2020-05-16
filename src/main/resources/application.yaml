@@ -1,0 +1,11 @@
+logging.level:
+  root: warn
+  com.sothawo: debug
+  org.springframework:
+    data: info
+    data.elasticsearch: info
+
+com:
+  sothawo:
+    blogsdegeodistancesort:
+      elastic-search-host: localhost:9200

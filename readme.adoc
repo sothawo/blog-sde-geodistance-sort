@@ -1,0 +1,23 @@
+= Spring Data Elasticsearch Sample Application
+A small applicaiton demonstrating the use of geo-distance sorts
+
+== Prerequisites
+
+=== Elasticsearch
+
+You need a running instance of Elasticsearch available with version 7.6 x. You can start it with docker (the command should be given all in one line):
+
+[code,shell]
+----
+docker run -p 9200:9200 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+----
+
+== Running the application
+
+The application can be started with
+[code,shell]
+----
+mvn spring-boot:run
+----
+
+When the index in Elasticsearch does not exist, it is created and the sample data is loaded (189361 records).

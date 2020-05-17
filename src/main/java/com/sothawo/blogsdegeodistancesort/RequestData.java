@@ -15,18 +15,35 @@
  */
 package com.sothawo.blogsdegeodistancesort;
 
-import org.springframework.data.domain.Sort;
-import org.springframework.data.elasticsearch.core.SearchHit;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
-
-import java.util.List;
-
 /**
  * @author P.J. Meisch (pj.meisch@sothawo.com)
  */
-public interface FoodPOIRepository extends ElasticsearchRepository<FoodPOI, String> {
+public class RequestData {
+    private String name;
+    private double lat;
+    private double lon;
 
-    List<SearchHit<FoodPOI>> searchTop3By(Sort sort);
+    public String getName() {
+        return name;
+    }
 
-    List<SearchHit<FoodPOI>> searchTop3ByName(String name, Sort sort);
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
 }

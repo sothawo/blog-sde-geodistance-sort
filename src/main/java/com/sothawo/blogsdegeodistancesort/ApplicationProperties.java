@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Configuration;
  * @author P.J. Meisch (pj.meisch@sothawo.com)
  */
 @Configuration
-@ConfigurationProperties(prefix = "com.sothawo.blogsdegeodistancesort")
+@ConfigurationProperties(prefix = "com.sothawo.blog-sde-geodistancesort")
 public class ApplicationProperties {
     /** host:port of the Elasticsearch cluster */
     private String elasticSearchHost;

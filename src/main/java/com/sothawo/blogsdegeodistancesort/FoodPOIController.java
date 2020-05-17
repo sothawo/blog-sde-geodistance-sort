@@ -16,8 +16,10 @@
 package com.sothawo.blogsdegeodistancesort;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 import org.springframework.data.elasticsearch.core.query.GeoDistanceOrder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,10 +41,21 @@ public class FoodPOIController {
         this.repository = repository;
     }
 
-    @PostMapping("/nearest5")
-    List<ResultData> nearest5(@RequestBody GeoPoint location) {
-        return repository.searchTop4By(Sort.by(new GeoDistanceOrder("location", location).withUnit("km")))
-            .stream()
+    @PostMapping("/nearest3")
+    List<ResultData> nearest3(@RequestBody RequestData requestData) {
+
+        GeoPoint location = new GeoPoint(requestData.getLat(), requestData.getLon());
+        Sort sort = Sort.by(new GeoDistanceOrder("location", location).withUnit("km"));
+
+        List<SearchHit<FoodPOI>> searchHits;
+
+        if (StringUtils.hasText(requestData.getName())) {
+            searchHits = repository.searchTop3ByName(requestData.getName(), sort);
+        } else {
+            searchHits = repository.searchTop3By(sort);
+        }
+
+        return searchHits.stream()
             .map(searchHit -> {
                 Double distance = (Double) searchHit.getSortValues().get(0);
                 FoodPOI foodPOI = searchHit.getContent();

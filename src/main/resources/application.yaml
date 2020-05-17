@@ -7,5 +7,5 @@ logging.level:
 
 com:
   sothawo:
-    blogsdegeodistancesort:
+    blog-sde-geodistancesort:
       elastic-search-host: localhost:9200

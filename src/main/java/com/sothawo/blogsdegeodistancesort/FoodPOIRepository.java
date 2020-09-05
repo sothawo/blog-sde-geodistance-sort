@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * @author P.J. Meisch (pj.meisch@sothawo.com)
  */
-public interface FoodPOIRepository extends ElasticsearchRepository<FoodPOI, String> {
+public interface FoodPOIRepository extends ElasticsearchRepository<FoodPOI, String>, FoodPOIRepositoryCustom {
 
     List<SearchHit<FoodPOI>> searchTop3By(Sort sort);
 

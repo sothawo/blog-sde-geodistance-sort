@@ -55,6 +55,21 @@ public class FoodPOIController {
             searchHits = repository.searchTop3By(sort);
         }
 
+        return toResultData(searchHits);
+    }
+
+    @PostMapping("/within")
+    List<ResultData> withinDistance(@RequestBody RequestData requestData) {
+
+        GeoPoint location = new GeoPoint(requestData.getLat(), requestData.getLon());
+
+        List<SearchHit<FoodPOI>> searchHits
+            = repository.searchWithin(location, requestData.distance, requestData.unit);
+
+        return toResultData(searchHits);
+    }
+
+    private List<ResultData> toResultData(List<SearchHit<FoodPOI>> searchHits) {
         return searchHits.stream()
             .map(searchHit -> {
                 Double distance = (Double) searchHit.getSortValues().get(0);
